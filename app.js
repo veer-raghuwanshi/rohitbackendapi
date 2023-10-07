@@ -2,12 +2,23 @@ const express = require("express")
 const app = express()
 // const port = process.env.PORT || 4000;
 const port =  4000;
-require("./db/connection")
+require("./src/db/connection")
 const cors = require("cors")
 app.use(express.json())
-const registerschema = require("./schema/registerschema")
+const registerschema = require("./src/schema/registerschema")
 app.use(cors())
 app.use(express.urlencoded({extended : true}))
+
+
+app.get('/', async (req, res) => {
+    try {
+      res.send("<h1> Welome to the server </h1>")
+    } catch (error) {
+      res.status(500).json({ message: 'An error occurred' });
+    }
+  });
+
+
 
 app.post("/register",async (req,res)=>{
     try {
